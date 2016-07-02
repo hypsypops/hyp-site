@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<!--
+	Retrospect by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>data.ecotrust.ca</title>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="../media/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../media/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="../media/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="../media/css/ie9.css" /><![endif]-->
+        <script src="http://data.ecotrust.ca/js/d3.v3.min.js"></script>
+        
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-23413568-2', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+        
+        <style>
+
+        .axis path, .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+
+        </style>
+	</head>
+	<body>
+
+		<!-- Header -->
+        <header id="header">
+            <h1><a href="http://data.ecotrust.ca">data.ecotrust.ca</a></h1>
+            <a href="#nav">Menu</a>
+        </header>
+
+		<!-- Nav -->
+			<nav id="nav">
+				<ul class="links">
+					<li><h2>Fisheries</h2></li>
+					<li><a href="crabmap.html">Area A Crab Map</a></li>
+					<li><a href="EMinfo.html">Electronic Monitoring</a></li>
+					<li><a href="groundfishconstellation.html">Constellations of Groundfish</a></li>
+					<li><a href="salmonconstellation.html">Constellations of Salmon</a></li>
+					<li><a href="herringconstellation.html">Constellations of Herring</a></li>
+					<li><a href="salmonbar.html">100 Years of Salmon: Bars</a></li>
+					<li><a href="salmonstream.html">100 Years of Salmon: Stream</a></li>
+					<li><a href="stacktastic.html">Stacktastic!</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+        <section id="main" class="wrapper">
+            <div class="container">
+
+                <header class="major special">
+                    <h2>A Century of Salmon</h2>
+                </header>
+                
+                <div class="tooltip"></div>
+                
+                <div id="chart">
+                    <svg id="graph" width="1450" height="600" viewBox="0 0 1450 600" preserveAspectRatio=xMidYMid></svg>
+                </div>
+                
+                
+                <p>This graph shows the ebb and flow of more than a century of salmon landings off the coast of British Columbia. Each band represents the weight of fish harvested coastwide, combining all fishing areas and gear types. Hover over the graph to view specific annual values.</p>
+
+                <p>For 1910-1950, the gray area indicates total salmon harvests, as species breakdowns are not available prior to 1951.</p>
+                
+                <p>&nbsp;</p>
+
+                <h5>Data Sources:</h5>
+                <p>Pre-1951 from <a href="http://www.statcan.gc.ca/pub/11-516-x/sectionn/N12_24-eng.csv">Statistics Canada Series N12-24: Quantities of fish landed, by region and major species, 1869-1975</a>.<br>
+                1951 and after from <a href="http://www.pac.dfo-mpo.gc.ca/stats/comm/summ-somm/index-eng.htm">DFO Pacific Region Commercial Statistics, 1951-2012</a></p>
+            </div>
+        </section>
+
+
+		<!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <ul class="icons">
+                    <li><a href="https://www.facebook.com/ecotrust.ca" class="icon fa-facebook">
+                        <span class="label">Facebook</span>
+                    </a></li>
+                    <li><a href="https://twitter.com/ecotrustcanada" class="icon fa-twitter">
+                        <span class="label">Twitter</span>
+                    </a></li>
+                    <li><a href="https://www.linkedin.com/company/68331" class="icon fa-linkedin">
+                        <span class="label">LinkedIn</span>
+                    </a></li>
+                </ul>
+                <ul class="copyright">
+                    <li>&copy; <a href="http://ecotrust.ca">Ecotrust Canada</a></li>
+                    <li>Design: <a href="http://templated.co">Templated</a></li>
+                </ul>
+            </div>
+        </footer>
+
+		<!-- Scripts -->
+        <script src="../media/js/jquery.min.js"></script>
+        <script src="../media/js/skel.min.js"></script>
+        <script src="../media/js/util.js"></script>
+        <!--[if lte IE 8]><script src="../media/js/ie/respond.min.js"></script><![endif]-->
+        <script src="../media/js/main.js"></script>
+
+<script>
+
+var format = d3.time.format("%Y");
+var numformat = d3.format("0,000");
+
+var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = parseInt(d3.select("#chart").style("width")) - margin.left - margin.right,
+    height = parseInt(d3.select("#chart").style("height")) - margin.top - margin.bottom;
+
+var x = d3.time.scale()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var z = d3.scale.ordinal()
+    .range(["#119499", "#76c8cf", "#0e4a5c", "#f2bb30", "#cf6b23", "#ccc"]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .ticks(10);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(0);
+
+var stack = d3.layout.stack()
+    .offset("silhouette")
+    .values(function(d) { return d.values; })
+    .x(function(d) { return d.date; })
+    .y(function(d) { return d.value; });
+
+var nest = d3.nest()
+    .key(function(d) { return d.WHAT; });
+
+var area = d3.svg.area()
+    .interpolate("monotone")      // makes graph curvy
+    .x(function(d) { return x(d.date); })
+    .y0(function(d) { return y(d.y0); })
+    .y1(function(d) { return y(d.y0 + d.y); });
+    
+var tooltip = d3.select("div.tooltip")
+    .append("div")
+    .attr("class", "remove")
+    .style("position", "absolute")
+    .style("z-index", "20")
+    .style("visibility", "hidden")
+    .style("top", "100px")
+    .style("center", "0px");
+
+var datearray = [];
+    
+var svg = d3.select("#graph")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+var chart = $("#graph"),
+    aspect = chart.width() / chart.height(),
+    container = chart.parent();
+$(window).on("resize", function() {
+    var targetWidth = container.width();
+    chart.attr("width", targetWidth);
+    chart.attr("height", Math.round(targetWidth / aspect));
+}).trigger("resize");
+
+
+
+d3.csv("Salmon1000tonnesStream.csv", function(data) {
+  data.forEach(function(d) {
+    d.date = format.parse(d.YEAR);
+    d.value = +d.VALUE;
+  });
+
+  var layers = stack(nest.entries(data));
+  var mousedate = [];
+  var pro = [];
+
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
+
+  svg.selectAll(".layer")
+      .data(layers)
+    .enter().append("path")
+      .attr("class", "layer")
+      .attr("d", function(d) { return area(d.values); })
+      .style("fill", function(d, i) { return z(i); })
+      .style({opacity:'1.0'})
+      .on('mouseover', function(d){
+        var nodeSelection = d3.select(this).style({opacity:'0.8'});
+        nodeSelection.select(".layer").style({opacity:'1.0'});
+        })
+      .on("mousemove", function(d, i) {
+        mousex = d3.mouse(this);
+        mousex = mousex[0];   // isolates x-values of mouse position
+        var invertedx = x.invert(mousex); // converts mousex to a time
+        invertedx = invertedx.getFullYear();  // converts invertedx time to a year
+        var selected = (d.values);    // gets all values associated with that layer (full object for that spp)
+        for (var k = 0; k < selected.length; k++) {
+          datearray[k] = selected[k].date
+          datearray[k] = datearray[k].getFullYear();};
+        mousedate = datearray.indexOf(invertedx); // indexOf returns index position of invertedx year in object array
+        pro = d.values[mousedate];    // pro returns value at mousedate index
+        d3.select(this)
+          .classed("hover", true)
+          //.attr("stroke", "#666666")
+          .attr("stroke-width", "0.5px"), 
+          tooltip.html( "<p>" + d.key + " salmon - " + invertedx + "<br>" + numformat(Math.round(pro.value * 1000)) + " tonnes</p>" ).style("visibility", "visible");
+      })
+      .on('mouseout', function(d,i) {
+        var nodeSelection = d3.select(this).style({opacity:'1.0'});
+        nodeSelection.select(".layer").style({opacity:'0.8'});
+      d3.select(this)
+        .classed("hover", false)
+        .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + pro + " tonnes</p>" ).style("visibility", "hidden");
+      });
+    
+  var vertical = d3.select(".chart")
+        .append("div")
+        .attr("class", "remove")
+        .style("position", "absolute")
+        .style("z-index", "19")
+        .style("width", "1px")
+        .style("height", height)
+        .style("top", "10px")
+        .style("bottom", "30px")
+        .style("left", "0px")
+        .style("background", "#000");
+        
+  d3.select(".chart")
+      .on("mouseover", function(){  
+         mousex = d3.mouse(this);
+         mousex = mousex[0];
+         vertical.style("left", mousex + "px")})
+      .on("mousemove", function(){  
+         mousex = d3.mouse(this);
+         mousex = mousex[0];
+         vertical.style("left", mousex + "px" )});
+      
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+      
+});
+
+</script>
+
+	</body>
+</html>
