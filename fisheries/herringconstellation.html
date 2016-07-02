@@ -1,32 +1,10 @@
 <!DOCTYPE HTML>
-<!--
-	Retrospect by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
 	<head>
-		<title>data.ecotrust.ca</title>
 		<meta charset="utf-8" />
-		<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="../media/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="../media/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="../media/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="../media/css/ie9.css" /><![endif]-->
-        <script src="http://data.ecotrust.ca/js/d3.v3.min.js"></script>
-        
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-          ga('create', 'UA-23413568-2', 'auto');
-          ga('send', 'pageview');
-
-        </script>
+        <script src="http://www.hypsypops.com/wp-content/uploads/2016/06/d3.v3.min_.js"></script>
         
         <style>
 
@@ -45,105 +23,36 @@
 	</head>
 	<body>
 
-		<!-- Header -->
-        <header id="header">
-            <h1><a href="http://data.ecotrust.ca">data.ecotrust.ca</a></h1>
-            <a href="#nav">Menu</a>
-        </header>
-
-		<!-- Nav -->
-			<nav id="nav">
-				<ul class="links">
-					<li><h2>Fisheries</h2></li>
-					<li><a href="crabmap.html">Area A Crab Map</a></li>
-					<li><a href="EMinfo.html">Electronic Monitoring</a></li>
-					<li><a href="groundfishconstellation.html">Constellations of Groundfish</a></li>
-					<li><a href="salmonconstellation.html">Constellations of Salmon</a></li>
-					<li><a href="herringconstellation.html">Constellations of Herring</a></li>
-					<li><a href="salmonbar.html">100 Years of Salmon: Bars</a></li>
-					<li><a href="salmonstream.html">100 Years of Salmon: Stream</a></li>
-					<li><a href="stacktastic.html">Stacktastic!</a></li>
-				</ul>
-			</nav>
-
 		<!-- Main -->
-        <section id="main" class="wrapper">
-            <div class="container">
+		<div id="chart">
+			<svg id="circle" width="1300" height="1300" viewBox="0 0 1300 1300" preserveAspectRatio="xMidYMid meet"></svg>
+		</div>
 
-                <header class="major special">
-                    <h2>Constellations of Herring</h2>
-                </header>
-                
-                
-                <div id="chart">
-                    <svg id="circle" width="1350" height="1350" viewBox="0 0 1350 1350" preserveAspectRatio=xMidYMid></svg>
-                </div>
-
-                    <div class="row uniform 50%">
-                        <div class="6u 12u$(xsmall)">
-                            <h5>Licences and Owners</h5>
-                            <form action="">
-                                <p>
-                                    <input type="radio" name="Color" value="allColor" id="allColor" checked>
-                                    <label for="allColor">Display All Colors</label>
-                                </p>
-                                
-                                <input type="radio" name="Color" value="ownerColor" id="ownerColor">
-                                <label for="ownerColor">Color Owners Only</label>
-                                <p>
-                                    <span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#1F78B4" /></svg> Commercial licence holder</span><br />
-                                    <span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#FFAA00" /></svg> Commercial communal licence holder</span><br />
-                                </p>
-                                
-                                <input type="radio" name="Color" value="licenceColor" id="licenceColor">
-                                <label for="licenceColor">Color Licences Only</label>
-                                <p>
-                                    <span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#008800" /></svg> Roe Herring by Gillnet</span><br />
-                                    <span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#FF6600" /></svg> Roe Herring by Seine</span><br />
-                                    <span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#990099" /></svg> Herring Spawn on Kelp</span>
-                                </p>
-                            </form>
-                        </div>
-                        <div class="6u 12u$(xsmall)">
-                            <p>This chart shows the clusters of ownership in British Columbia’s commercial herring fisheries. Each <b>dot</b> represents a licence or a licence owner. <b>Lines between dots</b> indicate ownership, linking owners with their licences. Due to the nature of licensing in this fishery, this diagram does not include any vessel data.</p>
-                            <p>The various clusters illustrate the extent of corporate control in the herring fisheries.</p>
-                            <h5>This chart is interactive!</h5>
-                            <p>Change dot colours using the buttons at left. Hover your mouse over dots for more details about licences and owners!</p>
-                        </div>
-                    </div>
-                
-                <p style="text-align:right;">Data Source: <a href="http://www-ops2.pac.dfo-mpo.gc.ca/vrnd-rneb/index-eng.cfm">DFO Licensed Fishing Vessel Directory - Pacific Region</a>, collected March 16, 2014.</p>
-            </div>
-        </section>
-
-
-		<!-- Footer -->
-        <footer id="footer">
-            <div class="inner">
-                <ul class="icons">
-                    <li><a href="https://www.facebook.com/ecotrust.ca" class="icon fa-facebook">
-                        <span class="label">Facebook</span>
-                    </a></li>
-                    <li><a href="https://twitter.com/ecotrustcanada" class="icon fa-twitter">
-                        <span class="label">Twitter</span>
-                    </a></li>
-                    <li><a href="https://www.linkedin.com/company/68331" class="icon fa-linkedin">
-                        <span class="label">LinkedIn</span>
-                    </a></li>
-                </ul>
-                <ul class="copyright">
-                    <li>&copy; <a href="http://ecotrust.ca">Ecotrust Canada</a></li>
-                    <li>Design: <a href="http://templated.co">Templated</a></li>
-                </ul>
-            </div>
-        </footer>
+		<h5>Licences and Owners</h5>
+		<form action="">
+			<p>
+				<input type="radio" name="Color" value="allColor" id="allColor" checked>
+				<label for="allColor">Display All Colors</label>
+			</p>
+			
+			<input type="radio" name="Color" value="ownerColor" id="ownerColor">
+			<label for="ownerColor">Color Owners Only</label>
+			<p>
+				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#1F78B4" /></svg> Commercial licence holder</span><br />
+				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#FFAA00" /></svg> Commercial communal licence holder</span><br />
+			</p>
+			
+			<input type="radio" name="Color" value="licenceColor" id="licenceColor">
+			<label for="licenceColor">Color Licences Only</label>
+			<p>
+				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#008800" /></svg> Roe Herring by Gillnet</span><br />
+				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#FF6600" /></svg> Roe Herring by Seine</span><br />
+				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#990099" /></svg> Herring Spawn on Kelp</span>
+			</p>
+		</form>
 
 		<!-- Scripts -->
-        <script src="../media/js/jquery.min.js"></script>
-        <script src="../media/js/skel.min.js"></script>
-        <script src="../media/js/util.js"></script>
-        <!--[if lte IE 8]><script src="../media/js/ie/respond.min.js"></script><![endif]-->
-        <script src="../media/js/main.js"></script>
+        <script src="http://www.hypsypops.com/wp-content/uploads/2016/06/jquery.min_.js"></script>
 
 <script>
 
@@ -1785,16 +1694,15 @@ var svg = d3.select("#circle")
     .attr("width", width)
     .attr("height", height);
 
-
-var chart = $("#circle"),
-    aspect = chart.width() / chart.height(),
-    container = chart.parent();
-$(window).on("resize", function() {
-    var targetWidth = container.width();
+	
+var aspect = width / height,
+    chart = d3.select('#chart');
+d3.select(window)
+  .on("resize", function() {
+    var targetWidth = chart.node().getBoundingClientRect().width;
     chart.attr("width", targetWidth);
-    chart.attr("height", Math.round(targetWidth / aspect));
-}).trigger("resize");
-
+    chart.attr("height", targetWidth / aspect);
+  });
 
 
 var link = svg.selectAll(".link")
