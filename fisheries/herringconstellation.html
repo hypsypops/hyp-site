@@ -25,31 +25,8 @@
 
 		<!-- Main -->
 		<div id="chart">
-			<svg id="circle" width="1300" height="1300" viewBox="0 0 1300 1300" preserveAspectRatio="xMidYMid meet"></svg>
+			<svg id="circle" viewBox="0 0 1300 1300" preserveAspectRatio="xMidYMid meet"></svg>
 		</div>
-
-		<h5>Licences and Owners</h5>
-		<form action="">
-			<p>
-				<input type="radio" name="Color" value="allColor" id="allColor" checked>
-				<label for="allColor">Display All Colors</label>
-			</p>
-			
-			<input type="radio" name="Color" value="ownerColor" id="ownerColor">
-			<label for="ownerColor">Color Owners Only</label>
-			<p>
-				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#1F78B4" /></svg> Commercial licence holder</span><br />
-				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#FFAA00" /></svg> Commercial communal licence holder</span><br />
-			</p>
-			
-			<input type="radio" name="Color" value="licenceColor" id="licenceColor">
-			<label for="licenceColor">Color Licences Only</label>
-			<p>
-				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#008800" /></svg> Roe Herring by Gillnet</span><br />
-				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#FF6600" /></svg> Roe Herring by Seine</span><br />
-				<span style="padding-left:50px;"><svg height="12" width="12"><circle cx="6" cy="6" r="6" fill="#990099" /></svg> Herring Spawn on Kelp</span>
-			</p>
-		</form>
 
 		<!-- Scripts -->
         <script src="http://www.hypsypops.com/wp-content/uploads/2016/06/jquery.min_.js"></script>
@@ -1678,7 +1655,7 @@ links.forEach(function(link) {
 
 
 var width = parseInt(d3.select("#chart").style("width")),
-    height = parseInt(d3.select("#chart").style("height"));
+    height = width;
 
 var force = d3.layout.force()
     .nodes(d3.values(nodes))
@@ -1695,14 +1672,14 @@ var svg = d3.select("#circle")
     .attr("height", height);
 
 	
-var aspect = width / height,
-    chart = d3.select('#chart');
-d3.select(window)
-  .on("resize", function() {
-    var targetWidth = chart.node().getBoundingClientRect().width;
+var chart = $("#circle"),
+    aspect = 1,
+    container = chart.parent();
+$(window).on("resize", function() {
+    var targetWidth = container.width();
     chart.attr("width", targetWidth);
-    chart.attr("height", targetWidth / aspect);
-  });
+    chart.attr("height", Math.round(targetWidth / aspect));
+}).trigger("resize");
 
 
 var link = svg.selectAll(".link")
@@ -1716,9 +1693,9 @@ var node = svg.selectAll(".node")
     .attr("class", "node");
 
 var t = svg.transition().duration(250);
-    
 
-    
+
+
 node.append("circle")
     .attr("r", function(d, i) {
         if (d.type == "owner" && d.communal == "yes") {
@@ -1732,62 +1709,6 @@ node.append("circle")
             }
         })
     .style("fill", function(d) {
-        if (d.type == "owner" && d.communal == "yes") {
-            return "#FFAA00";
-            }
-        if (d.type == "owner" && d.communal == "no") {
-            return "#1F78B4";
-            }
-        if (d.what == "Roe Herring Gillnet") {
-            return "#008800";   // green
-            }
-        if (d.what == "Roe Herring Seine") {
-            return "#FF6600";   // orange
-            }
-        if (d.what == "Spawn on Kelp") {
-            return "#990099";   // purple
-            }
-        else {
-            return "#aaa";
-            }
-        });
-
-d3.selectAll("input[name=Color]").on("change", colorchange);
-
-function colorchange() {
-    if (this.value === "allColor") transAllColor();
-    if (this.value === "ownerColor") transOwnerColor();
-    if (this.value === "licenceColor") transLicColor();
-}
-
-function transAllColor() {
-    var t = svg.transition().duration(1550),
-        g = t.selectAll(".node");
-    g.selectAll("circle").style("fill", function(d) {
-        if (d.type == "owner" && d.communal == "yes") {
-            return "#FFAA00";
-            }
-        if (d.type == "owner" && d.communal == "no") {
-            return "#1F78B4";
-            }
-        if (d.what == "Roe Herring Gillnet") {
-            return "#008800";   // green
-            }
-        if (d.what == "Roe Herring Seine") {
-            return "#FF6600";   // orange
-            }
-        if (d.what == "Spawn on Kelp") {
-            return "#990099";   // purple
-            }
-        else {
-            return "#aaa";
-            }
-        });
-}
-function transLicColor() {
-    var t = svg.transition().duration(1550),
-        g = t.selectAll(".node");
-    g.selectAll("circle").style("fill", function(d) {
         if (d.type == "owner") {
             return "#aaa";
             }
@@ -1804,22 +1725,6 @@ function transLicColor() {
             return "#aaa";
             }
         });
-}
-function transOwnerColor() {
-    var t = svg.transition().duration(1550),
-        g = t.selectAll(".node");
-    g.selectAll("circle").style("fill", function(d) {
-        if (d.type == "owner" && d.communal == "yes") {
-            return "#FFAA00";
-            }
-        if (d.type == "owner" && d.communal == "no") {
-            return "#1F78B4";
-            }
-        else {
-            return "#aaa";
-            }
-        });
-}
 
 node.append("title")
     .attr("x", 10)

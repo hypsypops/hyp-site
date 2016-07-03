@@ -25,7 +25,7 @@
 
 		<!-- Main -->
 		<div id="chart">
-			<svg id="circle" width="1300" height="1300" viewBox="0 0 1300 1300" preserveAspectRatio=xMidYMid></svg>
+			<svg id="circle" viewBox="0 0 1300 1300" preserveAspectRatio="xMidYMid meet"></svg>
 		</div>
 
 		<!-- Scripts -->
@@ -2564,7 +2564,7 @@ links.forEach(function(link) {
 
  
 var width = parseInt(d3.select("#chart").style("width")),
-    height = parseInt(d3.select("#chart").style("height"));
+    height = width;
 
 var force = d3.layout.force()
     .nodes(d3.values(nodes))
@@ -2582,7 +2582,7 @@ var svg = d3.select("#circle")
 
 
 var chart = $("#circle"),
-    aspect = chart.width() / chart.height(),
+    aspect = 1,
     container = chart.parent();
 $(window).on("resize", function() {
     var targetWidth = container.width();
