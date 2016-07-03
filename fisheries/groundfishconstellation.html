@@ -2576,9 +2576,7 @@ var force = d3.layout.force()
     .on("tick", tick)
     .start();
 
-var svg = d3.select("#circle")
-    .attr("width", width)
-    .attr("height", height);
+var svg = d3.select("#circle");
 
 
 var chart = $("#circle"),
@@ -2589,7 +2587,6 @@ $(window).on("resize", function() {
     chart.attr("width", targetWidth);
     chart.attr("height", Math.round(targetWidth / aspect));
 }).trigger("resize");
-
 
 
 var link = svg.selectAll(".link")

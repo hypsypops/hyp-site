@@ -1667,12 +1667,10 @@ var force = d3.layout.force()
     .on("tick", tick)
     .start();
 
-var svg = d3.select("#circle")
-    .attr("width", width)
-    .attr("height", height);
+var svg = d3.select("#circle");
 
 	
-var chart = $("#circle"),
+var chart = $("#chart"),
     aspect = 1,
     container = chart.parent();
 $(window).on("resize", function() {
@@ -1751,7 +1749,9 @@ function tick(e) {
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
   node
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+	  .attr("cx", function(d) { return d.x/2; })
+      .attr("cy", function(d) { return d.y/2; });
 }
 </script>
 
